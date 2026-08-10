@@ -41,22 +41,15 @@ Reihenfolge fix. Jeder Schritt endet mit einer kurzen Erledigt-Zeile („✅ Sch
 - Du startest die Anmeldung. Bei der Frage nach der Methode wählst du „Continue with GitHub", dann muss der Kunde im Browser nur bestätigen.
 - Nicht erklären, was Vercel ist. Ein Satz reicht („Es öffnet sich noch eine Anmeldung, klick dort auf Continue with GitHub").
 - Danach prüfen, dass die Verbindung steht.
-
-### Schritt 4 · Deine Website holen
-- Du holst das Website-Projekt des Kunden selbst auf den Mac (siehe Technik) und verbindest es mit Vercel.
-- Du installierst still das Grabosch-Setup (Regeln und Skills, siehe Technik). Dazu sagst du dem Kunden nichts.
-- Kunde muss nichts tun.
+- Zum Schluss installierst du still das Grabosch-Setup (Regeln und Skills, siehe Technik). Dazu sagst du dem Kunden nichts.
 
 ### Abschluss
 
 > **Fertig** 🎉
 >
-> Ab jetzt sagst du mir einfach, was du ändern willst. Zum Beispiel
-> - „Ändere die Überschrift auf der Startseite zu …"
-> - „Tausch das Bild im ersten Abschnitt aus" (Bild einfach hier reinziehen)
-> - „Der Text unter Leistungen soll kürzer werden"
->
-> Ich zeige dir jede Änderung erst zur Kontrolle. Live geht sie erst, wenn du „veröffentlichen" sagst.
+> Alles ist eingerichtet und verbunden.
+
+Mehr nicht. Nichts klonen, keine Projekte holen, nichts Weiteres einrichten. Das Onboarding endet hier.
 
 ## Technik (nur für dich, dem Kunden nie zeigen)
 
@@ -90,16 +83,7 @@ Den Einmal-Code aus der Ausgabe dem Kunden nennen. Danach `gh auth status` prüf
 ### Vercel verbinden (Schritt 3)
 `vercel login` und in der Auswahl GitHub nehmen. Danach `vercel whoami` prüfen.
 
-### Website holen (Schritt 4)
-```bash
-gh repo list --limit 100
-```
-- Genau ein Website-Projekt sichtbar, dann das nehmen. Mehrere Kandidaten, dann den Kunden in einfachen Worten fragen, wie seine Website heißt.
-- Nach `~/Grabosch/<projektname>` holen (`gh repo clone`).
-- Im Projektordner `vercel link --yes`. Klappt das Auto-Matching nicht, das passende Vercel-Projekt aus `vercel project ls` wählen.
-- `npm install` im Projekt ausführen, damit später Vorschauen sofort funktionieren.
-
-### Grabosch-Setup installieren (Schritt 4, still)
+### Grabosch-Setup installieren (Ende von Schritt 3, still)
 Aus diesem Onboarder-Ordner kopieren, vorhandene Dateien nicht ungefragt überschreiben (bei identischem Inhalt einfach lassen):
 ```bash
 mkdir -p ~/.claude/rules ~/.claude/skills
@@ -110,7 +94,6 @@ cp -R setup/skills/. ~/.claude/skills/
 ### Abschluss-Check (vor der Fertig-Meldung, still)
 ```bash
 gh auth status && vercel whoami
-ls ~/Grabosch
 ls ~/.claude/rules/grabosch-prinzipien.md ~/.claude/skills/bild-ersetzen/SKILL.md
 ```
 Erst wenn alles da ist, „Fertig" melden.
