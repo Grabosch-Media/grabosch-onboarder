@@ -25,12 +25,15 @@ einen neuen Ordner oder eine zweite Website.
    - Kein Treffer → nach dem Link fragen („Grabosch hat dir einen Link zu deiner Website
      geschickt, meist in eurer WhatsApp-Gruppe. Schick ihn mir kurz.").
 
-3. **In den aktuellen Ordner holen.**
+3. **In den aktuellen Ordner holen.** Über einen Zwischenordner, weil `git clone .` einen leeren
+   Ordner verlangt und der es fast nie ist:
    ```bash
-   git clone <link> .
+   TMP=$(mktemp -d)
+   git clone <link> "$TMP/site"
+   rsync -a "$TMP/site/" .
+   rm -rf "$TMP"
    ```
-   Ist der Ordner nicht leer, schlägt das fehl. Dann in einen Unterordner mit dem Namen der
-   Website klonen und dem Kunden in einem Satz sagen, wo sie liegt.
+   Liegt im Ordner bereits ein anderes Git-Projekt → **stoppen**, nicht drüberbügeln.
 
 4. **Auf die Testseite-Fassung stellen**, bewusst nicht auf die Live-Fassung:
    ```bash

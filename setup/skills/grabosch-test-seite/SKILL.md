@@ -27,8 +27,11 @@ Technisch: Branch `staging`. **Niemals `main` anfassen.**
 
 3. **Änderungen sichern.** Zeigt `git status --porcelain` etwas:
    ```bash
+   grep -qxF '.claude/settings.local.json' .git/info/exclude 2>/dev/null || echo '.claude/settings.local.json' >> .git/info/exclude
    git add -A
    ```
+   Taucht in der Liste etwas auf, das offensichtlich nicht zur Website gehört (Downloads,
+   Screenshots, Notizen), nicht mitschicken und den Kunden in einem Satz fragen.
    Dann committen mit einer kurzen, **deutschen** Message, die aus dem Diff kommt (kein
    generisches „update", keine Gedankenstriche). Nichts geändert → kein Commit, trotzdem
    weiter (vielleicht liegt noch etwas Ungepushtes da).

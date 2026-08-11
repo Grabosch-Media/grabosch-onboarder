@@ -130,14 +130,21 @@ bash ~/.grabosch/onboarder/setup/install.sh
 Gibt es `Grabosch-Setup installiert.` aus, ist alles da. Bricht es ab, steht die fehlende Datei in der Fehlerzeile.
 
 ### Website holen (Schritt 4)
-Ins **aktuelle** Verzeichnis, nicht in einen Unterordner:
+Ins **aktuelle** Verzeichnis, nicht in einen Unterordner. `git clone .` verlangt einen leeren Ordner, und der ist er fast nie (Claude Code legt beim ersten Erlauben `.claude/settings.local.json` an, dazu kommt gern `.DS_Store`). Deshalb über einen Zwischenordner, das klappt immer:
 ```bash
-git clone <website-link> .
+TMP=$(mktemp -d)
+git clone <website-link> "$TMP/site"
+# alles inklusive .git herüberziehen, Vorhandenes im Ordner bleibt bestehen
+rsync -a "$TMP/site/" .
+rm -rf "$TMP"
 git checkout staging 2>/dev/null || git checkout -b staging origin/staging
+# lokale Claude-Einstellungen nie mitveröffentlichen (nur lokal, wird nicht committet)
+grep -qxF '.claude/settings.local.json' .git/info/exclude 2>/dev/null || echo '.claude/settings.local.json' >> .git/info/exclude
 command -v pnpm >/dev/null || corepack enable pnpm 2>/dev/null || npm install -g pnpm
 pnpm install || pnpm install --no-frozen-lockfile
 ```
-- `git clone .` verlangt einen **leeren** Ordner. Liegen dort nur unsichtbare Dateien wie `.DS_Store`, vorher wegräumen. Liegt echter Inhalt darin, in einen Unterordner mit dem Namen der Website klonen und dem Kunden in einem Satz sagen, wo sie liegt.
+- Danach prüfen, dass `git rev-parse --show-toplevel` auf den aktuellen Ordner zeigt und `package.json` da ist.
+- Liegt im Ordner bereits ein **anderes** Git-Projekt, nicht drüberbügeln. Stoppen und an Grabosch verweisen.
 - Bewusst `staging`, nie `main`. Der Kunde arbeitet nie direkt an der Live-Fassung.
 - Kein `vercel link`, das braucht er nicht.
 
