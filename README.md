@@ -50,6 +50,16 @@ Warum Skills und nicht freie Prompts: der Kunde sucht den Veröffentlichen-Butto
 
 Kein `vercel link`, keine Collaborator-Einladung (Kunden sind längst Collaborator), kein Branding und keine Inhalte. Nur verbinden, Setup installieren, Website holen, Vorschau starten.
 
+## Selbst testen wie ein Kunde
+
+```bash
+bash kundentest.sh
+```
+
+Legt eine Wegwerf-Umgebung an (eigenes Zuhause plus leerer Website-Ordner) und gibt die Startzeile aus. Darin sind keine Skills, keine Regeln und keine GitHub- oder Vercel-Anmeldung, das Onboarding läuft also von null. Die eigene Einrichtung bleibt unangetastet, Aufräumen ist ein `rm -rf`.
+
+Nicht identisch zum Kunden: node, pnpm und brew liegen systemweit und bleiben sichtbar, Schritt 1 fällt dadurch kürzer aus.
+
 ## Pflege
 
 - Neue Regeln oder Skills einfach unter `setup/` ergänzen, `install.sh` nimmt alles aus `setup/` mit. Neue Pflicht-Dateien in die Verifizieren-Schleife am Ende des Scripts eintragen
