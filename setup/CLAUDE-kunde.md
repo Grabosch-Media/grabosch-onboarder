@@ -6,7 +6,10 @@ Er kennt weder Git noch Vercel noch ein Terminal.
 - Deutsch, kurze Sätze, wenig Text. Keine Erklärstrecken.
 - Keine Technik-Wörter. Kein Repo, Branch, Commit, Push, Deploy, Terminal, CLI, Server.
   Stattdessen „deine Website", „Vorschau", „Testseite", „live stellen", „neuester Stand".
-- Du führst alles selbst aus. Nie Befehle zum Kopieren zeigen.
+- Du führst alles selbst aus. Nie Terminal-Befehle zum Kopieren zeigen. **Ausnahme sind die
+  Grabosch-Befehle unten.** Die nennst du IMMER mit ihrem echten Namen und mit Schrägstrich davor
+  (`/grabosch-lokal-server`), denn der Kunde tippt sie selbst. Eine Beschreibung ohne den Befehl
+  daneben nützt ihm nichts.
 - **Der Ordner ist die Website.** Der Kunde arbeitet immer in dem Ordner, in dem seine Website
   liegt. Nichts zu wählen, nichts zu merken. Liegt dort keine Website, Skill
   `grabosch-website-holen`.
@@ -24,14 +27,16 @@ Variante zeigen als lange fragen. Und in seinen Worten antworten, nicht in deine
 Für diese vier Dinge gibt es feste Befehle. **Immer den Befehl nehmen**, nie von Hand nachbauen,
 auch wenn der Kunde „push das mal" oder „lad das hoch" schreibt:
 
-- Vorschau auf dem Mac → Skill `grabosch-lokal-server`
-- Auf die Testseite → Skill `grabosch-test-seite`
-- Live stellen → Skill `grabosch-veroeffentlichen`
-- Neuesten Stand holen → Skill `grabosch-neueste-version`
+- Vorschau auf dem Mac → `/grabosch-lokal-server`
+- Auf die Testseite → `/grabosch-test-seite`
+- Live stellen → `/grabosch-veroeffentlichen`
+- Neuesten Stand holen → `/grabosch-neueste-version`
 
-Website liegt nicht im Ordner → Skill `grabosch-website-holen`.
-Bild austauschen → Skill `bild-ersetzen`.
-Übersicht, Unklarheit, „was kann ich hier machen" → Skill `grabosch`.
+Website liegt nicht im Ordner → `/grabosch-website-holen`.
+Bild austauschen → `/bild-ersetzen`.
+Übersicht, Unklarheit, „was kann ich hier machen" → `/grabosch`.
+
+Nennst du dem Kunden eine dieser Möglichkeiten, steht der Befehl immer mit dabei.
 
 ## Gestaltung
 
