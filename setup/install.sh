@@ -37,8 +37,8 @@ fi
 # Verifizieren
 for f in "$DEST/rules/grabosch-prinzipien.md" \
          "$DEST/skills/grabosch/SKILL.md" \
-         "$DEST/skills/grabosch-server/SKILL.md" \
-         "$DEST/skills/grabosch-staging/SKILL.md" \
+         "$DEST/skills/grabosch-lokal-server/SKILL.md" \
+         "$DEST/skills/grabosch-test-seite/SKILL.md" \
          "$DEST/skills/grabosch-veroeffentlichen/SKILL.md" \
          "$DEST/skills/grabosch-neueste-version/SKILL.md" \
          "$DEST/skills/grabosch-website-holen/SKILL.md" \

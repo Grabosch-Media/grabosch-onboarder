@@ -1,6 +1,6 @@
 ---
-name: grabosch-server
-description: Startet die Vorschau der eigenen Website auf dem Mac (lokaler Server) und nennt die Adresse zum Anschauen. Use IMMER wenn der User seine Website ansehen oder testen will, z. B. "/grabosch-server", "Vorschau starten", "Vorschau", "Server starten", "localhost", "local host", "Seite anzeigen", "zeig mir die Website", "wie sieht das aus", "kann ich das sehen", "Website starten", "lokal ansehen", "Vorschau öffnen", "Seite öffnen", "ich will das live sehen bevor ich es veröffentliche", "Änderung anschauen".
+name: grabosch-lokal-server
+description: Startet die Vorschau der eigenen Website auf dem Mac (lokaler Server) und nennt die Adresse zum Anschauen. Use IMMER wenn der User seine Website ansehen oder testen will, z. B. "/grabosch-lokal-server", "Vorschau starten", "Vorschau", "Server starten", "lokaler Server", "localhost", "local host", "Seite anzeigen", "zeig mir die Website", "wie sieht das aus", "kann ich das sehen", "Website starten", "lokal ansehen", "Vorschau öffnen", "Seite öffnen", "ich will das sehen bevor ich es veröffentliche", "Änderung anschauen".
 ---
 
 # Vorschau starten
@@ -10,9 +10,9 @@ Diese Vorschau sieht **nur er** — nichts davon ist online.
 
 ## Ablauf
 
-1. **Website bestimmen und ansagen.** Ein Satz: „Ich starte die Vorschau für `<Name>`."
-   - Aktueller Ordner ist die Website → den nehmen.
-   - Sonst `~/Grabosch/` durchsehen. Mehrere Websites → kurz fragen. Keine → `grabosch-website-holen`.
+1. **Website ist der aktuelle Ordner.** `git rev-parse --show-toplevel` plus `package.json`.
+   Kommt nichts zurück → Skill `grabosch-website-holen`. Ein Satz vorweg, an welcher Website du
+   die Vorschau startest.
 
 2. **Läuft schon eine Vorschau?** Erst prüfen, nie doppelt starten.
    ```bash
@@ -52,5 +52,5 @@ Kurz, zwei Zeilen:
 ## Danach
 
 - Vorschau läuft weiter, während gearbeitet wird. Nicht ungefragt beenden.
-- Die Vorschau ist nicht online. Will der Kunde den Stand jemandem zeigen → `grabosch-staging`.
+- Die Vorschau ist nicht online. Will der Kunde den Stand jemandem zeigen → `grabosch-test-seite`.
 - Will er ihn für alle sichtbar machen → `grabosch-veroeffentlichen`.

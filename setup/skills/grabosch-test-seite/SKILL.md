@@ -1,6 +1,6 @@
 ---
-name: grabosch-staging
-description: Stellt den aktuellen Stand auf die Testseite (interne Vorschau-Adresse zum Teilen) — noch NICHT auf die echte Website. Use IMMER wenn der User seinen Stand intern zeigen oder testen will, z. B. "/grabosch-staging", "auf die Testseite", "Testseite", "Testlink", "Vorschau-Link", "Zwischenlink", "Zwischenstand", "intern veröffentlichen", "für die Kollegen veröffentlichen", "meinem Team zeigen", "meinem Chef zeigen", "erstmal testen", "noch nicht live", "Entwurf online stellen", "zum Abstimmen hochladen", "Link zum Zeigen".
+name: grabosch-test-seite
+description: Stellt den aktuellen Stand auf die Testseite (interne Vorschau-Adresse zum Teilen) — noch NICHT auf die echte Website. Use IMMER wenn der User seinen Stand intern zeigen oder testen will, z. B. "/grabosch-test-seite", "auf die Testseite", "Testseite", "Testlink", "Vorschau-Link", "Zwischenlink", "Zwischenstand", "intern veröffentlichen", "für die Kollegen veröffentlichen", "meinem Team zeigen", "meinem Chef zeigen", "erstmal testen", "noch nicht live", "Entwurf online stellen", "zum Abstimmen hochladen", "Link zum Zeigen", "staging".
 ---
 
 # Auf die Testseite stellen
@@ -13,6 +13,7 @@ Technisch: Branch `staging`. **Niemals `main` anfassen.**
 ## Ablauf
 
 1. **Ansagen.** Ein Satz: „Ich stelle das jetzt auf die Testseite …"
+   Die Website ist der aktuelle Ordner (`git rev-parse --show-toplevel`).
 
 2. **Richtige Fassung.** `git rev-parse --abbrev-ref HEAD`
    - `staging` → weiter.

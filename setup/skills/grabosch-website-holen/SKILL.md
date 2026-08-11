@@ -1,50 +1,53 @@
 ---
 name: grabosch-website-holen
-description: Holt die eigene Website einmalig auf den Mac und legt den Ordner dafür an, danach ist sie bearbeitbar. Use IMMER wenn der User seine Website noch nicht lokal hat oder sie nicht findet, z. B. "/grabosch-website-holen", "Website auf meinen Mac holen", "Website herunterladen", "Projekt holen", "klonen", "clone", "einrichten", "wo ist meine Website", "ich finde meine Website nicht", "ich will anfangen", "erste Einrichtung", "Website öffnen aber da ist nichts", "neuer Rechner".
+description: Holt die Website in den aktuellen Ordner, wenn sie dort noch nicht liegt (neuer Mac, neuer Ordner, zweite Website). Use IMMER wenn im aktuellen Ordner keine Website liegt oder der User sie nicht findet, z. B. "/grabosch-website-holen", "Website auf meinen Mac holen", "Website herunterladen", "Projekt holen", "klonen", "clone", "einrichten", "wo ist meine Website", "ich finde meine Website nicht", "ich will anfangen", "hier ist ja nichts", "neuer Rechner", "zweite Website".
 ---
 
-# Website auf den Mac holen
+# Website in diesen Ordner holen
 
-Einmal pro Mac. Danach liegt die Website in einem festen Ordner und alle anderen Befehle
-funktionieren.
+Normalerweise ist das beim Onboarding schon passiert. Dieser Befehl ist für den zweiten Mac,
+einen neuen Ordner oder eine zweite Website.
 
 ## Ablauf
 
-1. **Prüfen, ob sie schon da ist.**
+1. **Erst prüfen, ob sie schon da ist.**
    ```bash
-   ls ~/Grabosch 2>/dev/null
+   git rev-parse --show-toplevel 2>/dev/null && ls package.json 2>/dev/null
    ```
-   Ist die Website schon da → nicht neu holen, stattdessen `grabosch-neueste-version`.
+   Beides da → nicht neu holen, stattdessen `grabosch-neueste-version`.
 
-2. **Welche Website.** Verbundene Projekte auflisten und den Kunden wählen lassen, wenn es
-   mehrere sind:
+2. **Welche Website.** Hat der Kunde einen Link geschickt, den nehmen. Sonst seine Projekte
+   auflisten und wählen lassen:
    ```bash
-   gh repo list --limit 30 --json name,owner,updatedAt --jq '.[] | "\(.owner.login)/\(.name)"'
+   gh repo list --limit 30 --json name,owner --jq '.[] | "\(.owner.login)/\(.name)"'
    ```
    - Genau ein Treffer → den nehmen, nur kurz bestätigen lassen.
    - Kein Treffer → nach dem Link fragen („Grabosch hat dir einen Link zu deiner Website
      geschickt, meist in eurer WhatsApp-Gruppe. Schick ihn mir kurz.").
 
-3. **Holen.**
+3. **In den aktuellen Ordner holen.**
    ```bash
-   mkdir -p ~/Grabosch
-   git clone <link> ~/Grabosch/<name>
-   cd ~/Grabosch/<name>
+   git clone <link> .
+   ```
+   Ist der Ordner nicht leer, schlägt das fehl. Dann in einen Unterordner mit dem Namen der
+   Website klonen und dem Kunden in einem Satz sagen, wo sie liegt.
+
+4. **Auf die Testseite-Fassung stellen**, bewusst nicht auf die Live-Fassung:
+   ```bash
    git checkout staging 2>/dev/null || git checkout -b staging origin/staging
    ```
-   Es wird bewusst die Testseite-Fassung genommen, nicht die Live-Fassung.
 
-4. **Bausteine installieren** (dauert 1 bis 2 Minuten, dem Kunden in einem Satz sagen):
+5. **Bausteine installieren** (dauert 1 bis 2 Minuten, dem Kunden in einem Satz sagen):
    ```bash
    command -v pnpm >/dev/null || corepack enable pnpm 2>/dev/null || npm install -g pnpm
    pnpm install || pnpm install --no-frozen-lockfile
    ```
 
-5. **Prüfen**, dass wirklich alles da ist (`ls package.json`, `git status`), erst dann fertig melden.
+6. **Prüfen** (`ls package.json`, `git status`), erst dann fertig melden.
 
 ## Antwort
 
-> ✅ Deine Website liegt jetzt in `~/Grabosch/<name>`.
+> ✅ Deine Website liegt jetzt in diesem Ordner.
 > Sag „Vorschau starten", dann zeige ich sie dir.
 
 ## Hinweis für die nächsten Male

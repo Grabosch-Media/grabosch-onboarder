@@ -12,7 +12,8 @@ Zerstört nie etwas Lokales.
 
 ## Ablauf
 
-1. **Ansagen.** „Ich hole den neuesten Stand für `<Name>` …"
+1. **Ansagen.** „Ich hole den neuesten Stand …" Die Website ist der aktuelle Ordner
+   (`git rev-parse --show-toplevel`). Kommt nichts zurück → Skill `grabosch-website-holen`.
 
 2. **Fassung prüfen.** `git rev-parse --abbrev-ref HEAD`. Ist es nicht `staging`, still auf
    `staging` wechseln (`git checkout staging 2>/dev/null || git checkout -b staging origin/staging`).
@@ -32,7 +33,7 @@ Zerstört nie etwas Lokales.
    - Schon aktuell → einfach das sagen.
    - `--ff-only` schlägt fehl (eigene und fremde Änderungen laufen auseinander) → **nichts
      verändern**, kurz melden: es liegen eigene, noch nicht veröffentlichte Änderungen vor.
-     Anbieten, sie über `grabosch-staging` zu veröffentlichen, das führt beides sauber zusammen.
+     Anbieten, sie über `grabosch-test-seite` zu veröffentlichen, das führt beides sauber zusammen.
 
 5. **Läuft eine Vorschau?** Dann kurz sagen, dass sie den neuen Stand automatisch zeigt.
 

@@ -4,8 +4,12 @@ Richtet einen Kunden-Mac für die eigene KI-Website ein. Claude führt den Kunde
 
 ## Ablauf pro Kunde
 
-1. Dem Kunden die Nachricht aus `START-NACHRICHT.md` schicken
+1. Dem Kunden die Nachricht aus `START-NACHRICHT.md` schicken, mit seinem Website-Link drin
 2. Fertig. Claude auf dem Kunden-Mac übernimmt den Rest
+
+Der Kunde legt einen leeren Ordner an, öffnet dort Claude Code und schickt die zwei Links. Danach laufen fünf Schritte durch (Werkzeuge, GitHub, Vercel, Website holen, Vorschau starten). Am Ende läuft seine Seite auf seinem Mac und er kann direkt die erste Änderung sagen.
+
+**Der Ordner ist die Website.** Die Website wird in genau den Ordner geholt, in dem der Kunde arbeitet. Nichts zu wählen, nichts zu merken.
 
 ## Was drin ist
 
@@ -20,18 +24,18 @@ Richtet einen Kunden-Mac für die eigene KI-Website ein. Claude führt den Kunde
 Alle unter dem Präfix `grabosch`, der Kunde tippt `/grabosch` und sieht sie alle.
 
 - `grabosch` Hauptskill, Übersicht plus Ton und harte Regeln
-- `grabosch-server` Vorschau auf dem Mac (Localhost)
-- `grabosch-staging` auf die Testseite
+- `grabosch-lokal-server` Vorschau auf dem Mac (Localhost)
+- `grabosch-test-seite` auf die Testseite
 - `grabosch-veroeffentlichen` live stellen (Testseite plus echte Website)
 - `grabosch-neueste-version` neuesten Stand holen
-- `grabosch-website-holen` Website einmalig auf den Mac holen
+- `grabosch-website-holen` Fallback für zweiten Mac oder zweite Website
 - `bild-ersetzen` Bild austauschen
 
 Warum Skills und nicht freie Prompts: der Kunde sucht den Veröffentlichen-Button. Ein Skill macht den Ablauf jedes Mal gleich und lässt nichts aus, freies „push das mal hoch" nicht.
 
 ## Was das Onboarding NICHT macht
 
-Nichts klonen, keine Website holen, keine Projekte verlinken. Nur verbinden und Setup installieren. Die Website holt der Kunde danach selbst per `grabosch-website-holen`.
+Kein `vercel link`, keine Collaborator-Einladung (Kunden sind längst Collaborator), kein Branding und keine Inhalte. Nur verbinden, Setup installieren, Website holen, Vorschau starten.
 
 ## Pflege
 

@@ -14,11 +14,12 @@ Technisch: erst `staging` hochladen, dann `main` per Fast-Forward nachziehen.
 ## Ablauf
 
 1. **Ansagen.** Ein Satz: „Ich stelle das jetzt live …"
+   Die Website ist der aktuelle Ordner (`git rev-parse --show-toplevel`).
    Hat der Kunde die Änderung noch nirgends gesehen, davor **eine** kurze Rückfrage anbieten
    („Willst du es vorher kurz in der Vorschau ansehen?"). Sagt er nein oder hat er es schon
    gesehen → durchziehen, nicht weiter nachfragen.
 
-2. **Testseite aktualisieren.** Schritte 2 bis 6 aus dem Skill `grabosch-staging` genau so
+2. **Testseite aktualisieren.** Schritte 2 bis 6 aus dem Skill `grabosch-test-seite` genau so
    ausführen (richtige Fassung, sichern, Stand der anderen holen, Konflikte, `git push origin staging`).
    Stoppt es dort → hier auch stoppen, nichts live stellen.
 
