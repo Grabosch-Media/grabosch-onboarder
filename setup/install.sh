@@ -4,7 +4,8 @@
 set -euo pipefail
 
 SRC="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-DEST="$HOME/.claude"
+# CLAUDE_CONFIG_DIR respektieren, damit sich ein Testlauf sauber umlenken laesst
+DEST="${CLAUDE_CONFIG_DIR:-$HOME/.claude}"
 
 mkdir -p "$DEST/rules" "$DEST/skills"
 

@@ -48,7 +48,7 @@ Warum Skills und nicht freie Prompts: der Kunde sucht den Veröffentlichen-Butto
 
 ## Was das Onboarding NICHT macht
 
-Kein `vercel link`, keine Collaborator-Einladung (Kunden sind längst Collaborator), kein Branding und keine Inhalte. Nur verbinden, Setup installieren, Website holen, Vorschau starten.
+Kein `vercel link`, keine Collaborator-Einladung (Kunden sind längst Collaborator), kein Branding und keine Inhalte. Nur verbinden, Setup installieren, Website holen. Die Vorschau startet der Kunde danach selbst.
 
 ## Selbst testen wie ein Kunde
 
@@ -56,9 +56,9 @@ Kein `vercel link`, keine Collaborator-Einladung (Kunden sind längst Collaborat
 bash kundentest.sh
 ```
 
-Legt eine Wegwerf-Umgebung an (eigenes Zuhause plus leerer Website-Ordner) und gibt die Startzeile aus. Darin sind keine Skills, keine Regeln und keine GitHub- oder Vercel-Anmeldung, das Onboarding läuft also von null. Die eigene Einrichtung bleibt unangetastet, Aufräumen ist ein `rm -rf`.
+Legt einen leeren Website-Ordner an, sichert die eigene `CLAUDE.md` und gibt die Startzeile aus. `bash kundentest.sh aufraeumen` setzt alles zurück.
 
-Nicht identisch zum Kunden: node, pnpm und brew liegen systemweit und bleiben sichtbar, Schritt 1 fällt dadurch kürzer aus.
+Kein Fake-Zuhause: Claude Code hängt seine Anmeldung an einen Hash des Config-Ordners, mit fremdem `HOME` oder `CLAUDE_CONFIG_DIR` ist man ausgeloggt. Der Test läuft deshalb in der normalen Einrichtung. Nicht identisch zum Kunden: die eigenen Skills und die eigene `CLAUDE.md` reden mit, und GitHub, Vercel, node und pnpm sind schon da.
 
 ## Pflege
 

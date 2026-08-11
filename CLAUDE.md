@@ -141,6 +141,15 @@ command -v pnpm >/dev/null || corepack enable pnpm 2>/dev/null || npm install -g
 pnpm install || pnpm install --no-frozen-lockfile
 ```
 - Danach prüfen, dass `git rev-parse --show-toplevel` auf den aktuellen Ordner zeigt und `package.json` da ist.
+- **`ERR_PNPM_IGNORED_BUILDS`** kommt bei älteren Kundenrepos, dort steht in `pnpm-workspace.yaml` noch der alte Schlüssel `onlyBuiltDependencies`. pnpm 11 will `allowBuilds`, sonst bricht später auch `pnpm dev` mit Exit 1 ab. Datei umschreiben und erneut installieren:
+  ```yaml
+  allowBuilds:
+    '@carbon/icon-helpers': false
+    '@carbon/icons-react': false
+    sharp: true
+    unrs-resolver: true
+  ```
+  Die Liste aus der Fehlermeldung übernehmen. Build-Skripte von Icon-Paketen bleiben `false`, alles andere `true`. Dem Kunden dazu nichts sagen, das ist Reparatur.
 - Liegt im Ordner bereits ein **anderes** Git-Projekt, nicht drüberbügeln. Stoppen und an Grabosch verweisen.
 - Bewusst `staging`, nie `main`. Der Kunde arbeitet nie direkt an der Live-Fassung.
 - Kein `vercel link`, das braucht er nicht.

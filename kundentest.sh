@@ -1,48 +1,72 @@
 #!/usr/bin/env bash
-# Baut eine Wegwerf-Umgebung, in der das Onboarding sich anfuehlt wie beim Kunden.
-# Aendert nichts an der eigenen Einrichtung. Loeschen reicht zum Aufraeumen.
+# Onboarding einmal selbst durchspielen, ohne die eigene Einrichtung zu verlieren.
+#
+#   bash kundentest.sh              Testordner anlegen, CLAUDE.md sichern
+#   bash kundentest.sh aufraeumen   alles zuruecksetzen
+#
+# Warum kein Fake-HOME: Claude Code haengt seine Anmeldung an einen Hash des
+# Config-Ordners. Mit fremdem HOME oder CLAUDE_CONFIG_DIR ist man ausgeloggt und
+# kommt ohne neuen Login nicht rein. Deshalb laeuft der Test in der normalen
+# Einrichtung, und dieses Script macht ihn rueckgaengig.
 set -euo pipefail
 
-BOX="${1:-$HOME/Grabosch-Kundentest}"
+BOX="$HOME/Grabosch-Kundentest"
+CFG="${CLAUDE_CONFIG_DIR:-$HOME/.claude}"
+BACKUP="$BOX/CLAUDE.md.backup"
+MARKER="<!-- GRABOSCH START (automatisch gepflegt, nicht von Hand aendern) -->"
 
-if [ -e "$BOX" ]; then
-  printf 'Ordner existiert schon: %s\nLoeschen und neu anlegen? [j/N] ' "$BOX"
-  read -r a
-  [ "$a" = "j" ] || { echo "Abgebrochen."; exit 1; }
+if [ "${1:-}" = "aufraeumen" ]; then
+  # Kunden-Block aus der eigenen CLAUDE.md entfernen
+  if [ -f "$CFG/CLAUDE.md" ] && grep -qF "$MARKER" "$CFG/CLAUDE.md"; then
+    if [ -f "$BACKUP" ]; then
+      cp "$BACKUP" "$CFG/CLAUDE.md"
+      echo "CLAUDE.md aus dem Backup wiederhergestellt."
+    else
+      TMP="$(mktemp)"
+      awk -v s="$MARKER" -v e="<!-- GRABOSCH END -->" '
+        index($0,s){skip=1} !skip{print} skip && index($0,e){skip=0}
+      ' "$CFG/CLAUDE.md" > "$TMP"
+      mv "$TMP" "$CFG/CLAUDE.md"
+      echo "Grabosch-Block aus CLAUDE.md entfernt."
+    fi
+  fi
+  rm -f "$CFG/rules/grabosch-prinzipien.md"
   rm -rf "$BOX"
+  echo "Aufgeraeumt. Die grabosch-Skills in $CFG/skills bleiben liegen, die stoeren nicht."
+  exit 0
 fi
 
-mkdir -p "$BOX/home" "$BOX/website"
+mkdir -p "$BOX/website"
+[ -f "$CFG/CLAUDE.md" ] && cp "$CFG/CLAUDE.md" "$BACKUP"
 
 cat <<EOF
 
 Testumgebung steht.
 
-  Fake-Zuhause:   $BOX/home
   Website-Ordner: $BOX/website   (leer, wie beim Kunden)
+  Backup:         ${BACKUP}
 
-So startest du den Test. Ein neues Terminal-Fenster, dann diese eine Zeile
-(sie wechselt in den leeren Website-Ordner und startet Claude Code darin):
+1. Neues Terminal-Fenster, diese Zeile:
 
-  cd "$BOX/website" && HOME="$BOX/home" claude
+     cd "$BOX/website" && claude --dangerously-skip-permissions
 
-Danach schickst du genau die Kundennachricht:
+2. Als erste Nachricht genau das schicken, was der Kunde schickt:
 
-  Bitte mach das Grabosch-Onboarding fuer mich.
+     Bitte mach das Grabosch-Onboarding fuer mich.
 
-  Anleitung: https://github.com/Grabosch-Media/grabosch-onboarder
-  Meine Website: <website-link>
+     Anleitung: https://github.com/Grabosch-Media/grabosch-onboarder
+     Meine Website: <website-link>
 
-Was dabei echt frisch ist
-  - keine Skills, keine Regeln, keine CLAUDE.md
-  - GitHub und Vercel sind nicht angemeldet, du machst die Anmeldung wie ein Kunde
+3. Danach ausprobieren: /grabosch, dann /grabosch-lokal-server, dann eine
+   Aenderung sagen. NICHT veroeffentlichen, das waere eine echte Kundenseite.
 
-Was NICHT frisch ist
-  - node, pnpm und brew liegen systemweit und bleiben sichtbar, Schritt 1 faellt
-    deshalb kuerzer aus als beim Kunden
-  - Claude Code selbst kann nach dem Login fragen, das ist normal
+4. Hinterher zuruecksetzen:
 
-Aufraeumen
-  rm -rf "$BOX"
+     bash kundentest.sh aufraeumen
+
+Was im Test anders ist als beim Kunden
+  - deine eigene CLAUDE.md und deine Skills sind da und reden mit
+  - GitHub, Vercel, node und pnpm sind schon eingerichtet, Schritt 1 bis 3
+    laufen deshalb fast leer durch
 
 EOF

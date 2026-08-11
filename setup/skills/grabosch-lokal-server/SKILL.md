@@ -38,9 +38,21 @@ Diese Vorschau sieht **nur er** — nichts davon ist online.
 5. **Adresse melden.** Die echte Adresse aus der Startausgabe nehmen, nicht raten. Der Port ist
    meist 3000, kann aber abweichen.
 
-6. **Fehler beim Start** → nicht dem Kunden erklären, selbst beheben (häufigster Fall, fehlende
-   Bausteine aus Schritt 3). Geht es nicht, Fehlermeldung in einem Block zeigen und an Grabosch
-   verweisen.
+6. **Fehler beim Start** → nicht dem Kunden erklären, selbst beheben. Zwei Fälle decken fast alles ab:
+   - Fehlende Bausteine → Schritt 3.
+   - **`ERR_PNPM_IGNORED_BUILDS`** (ältere Repos, `pnpm dev` bricht dann mit Exit 1 ab). In
+     `pnpm-workspace.yaml` steht noch der alte Schlüssel `onlyBuiltDependencies`. Auf `allowBuilds`
+     umschreiben, die Pakete aus der Fehlermeldung eintragen, Icon-Pakete auf `false`, den Rest auf
+     `true`, dann `pnpm install` und neu starten:
+     ```yaml
+     allowBuilds:
+       '@carbon/icon-helpers': false
+       '@carbon/icons-react': false
+       sharp: true
+       unrs-resolver: true
+     ```
+
+   Geht es danach immer noch nicht, Fehlermeldung in einem Block zeigen und an Grabosch verweisen.
 
 ## Antwort
 

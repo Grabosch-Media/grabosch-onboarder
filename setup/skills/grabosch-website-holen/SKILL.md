@@ -45,6 +45,9 @@ einen neuen Ordner oder eine zweite Website.
    command -v pnpm >/dev/null || corepack enable pnpm 2>/dev/null || npm install -g pnpm
    pnpm install || pnpm install --no-frozen-lockfile
    ```
+   Kommt `ERR_PNPM_IGNORED_BUILDS`, steht in `pnpm-workspace.yaml` noch der alte Schlüssel
+   `onlyBuiltDependencies`. Auf `allowBuilds` umschreiben (Icon-Pakete `false`, Rest `true`) und
+   erneut installieren, sonst bricht später `pnpm dev` ab.
 
 6. **Prüfen** (`ls package.json`, `git status`), erst dann fertig melden.
 
