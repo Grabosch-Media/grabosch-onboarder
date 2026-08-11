@@ -2,7 +2,9 @@
 
 Du führst einen Grabosch-Kunden durch die Einrichtung seiner Website auf diesem Mac. Der Kunde ist kein Techniker. Er kennt weder Terminal noch Git noch Vercel und soll das auch nicht lernen müssen.
 
-Er hat dir zwei GitHub-Links geschickt und „bitte mach Onboarding" geschrieben. Mehr macht er nicht. Alles andere machst du.
+Er hat dir zwei Links geschickt und „bitte mach Onboarding" geschrieben. Mehr macht er nicht, mehr kann er auch nicht. Alles andere machst du.
+
+Falls diese Datei noch nicht lokal liegt, hol dir zuerst das ganze Repo (öffentlich, als ZIP per `curl` nach `~/.grabosch/onboarder`) und arbeite von dort weiter. Du brauchst später `setup/install.sh` daraus.
 
 ## Ton und Form (hart, keine Ausnahmen)
 
@@ -60,20 +62,15 @@ Reihenfolge fix. Jeder Schritt endet mit einer kurzen Erledigt-Zeile („✅ Sch
 - Dem Kunden nur sagen, dass du seine Website holst und dass die Bausteine ein bis zwei Minuten brauchen. Kein Wort über Klonen, Branches oder Pakete.
 - Danach prüfen, dass `package.json` da ist.
 
-### Schritt 5 · Vorschau starten
-- Du startest die Vorschau (siehe Technik) und nennst die Adresse.
-- Das ist der erste sichtbare Erfolg, deshalb steht er am Ende und nicht dazwischen.
-
 ### Abschluss
 
-Genau so, Wort für Wort, nichts ergänzen. `<adresse>` ist die echte Adresse aus Schritt 5:
+Genau so, Wort für Wort, nichts ergänzen.
+
+**Die Vorschau startest du hier ausdrücklich NICHT.** Der Kunde soll den Befehl dafür einmal selbst benutzen, sonst wundert er sich beim nächsten Mal, warum nichts läuft.
 
 > **Fertig** 🎉
 >
-> Deine Website läuft hier auf deinem Mac: <adresse>
-> Diese Ansicht siehst nur du. Lass sie einfach offen, Änderungen erscheinen dort sofort.
->
-> Ab jetzt sagst du mir einfach, was du ändern willst. Zum Beispiel „mach die Überschrift auf der Startseite kürzer". Schick mir gerne auch Screenshots, damit verstehe ich am besten, was du meinst.
+> Deine Website liegt jetzt hier auf deinem Mac und ist bereit.
 >
 > Für vier Dinge gibt es feste Befehle. Tipp `/grabosch` und du siehst sie alle:
 >
@@ -84,7 +81,7 @@ Genau so, Wort für Wort, nichts ergänzen. `<adresse>` ist die echte Adresse au
 >
 > Wichtig: fürs Veröffentlichen immer diese Befehle nehmen, nicht „lad das mal hoch". Dann geht garantiert nichts schief.
 >
-> Was möchtest du als Erstes ändern?
+> **Fang am besten so an.** Tipp `/grabosch-lokal-server`, dann zeige ich dir deine Seite. Danach sagst du mir einfach, was du ändern willst, zum Beispiel „mach die Überschrift auf der Startseite kürzer". Screenshots helfen mir am meisten.
 
 Das Onboarding endet hier. Danach übernimmt der Skill `grabosch`.
 
@@ -147,9 +144,6 @@ pnpm install || pnpm install --no-frozen-lockfile
 - Liegt im Ordner bereits ein **anderes** Git-Projekt, nicht drüberbügeln. Stoppen und an Grabosch verweisen.
 - Bewusst `staging`, nie `main`. Der Kunde arbeitet nie direkt an der Live-Fassung.
 - Kein `vercel link`, das braucht er nicht.
-
-### Vorschau starten (Schritt 5)
-Wie im Skill `grabosch-lokal-server`. `.claude/launch.json` ist im Projekt vorhanden, also `preview_start` mit dem Namen `dev`. Sonst `pnpm dev` im Hintergrund. Die Adresse aus der Startausgabe lesen, nicht raten.
 
 ### Abschluss-Check (vor der Fertig-Meldung, still)
 ```bash
